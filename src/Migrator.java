@@ -18,11 +18,14 @@ public class Migrator {
         return fileContent.substring(0, Math.min(fileContent.length(), 100)).contains("coreshow.php");
     }
 
-    private static class PathUtils {
+    static class PathUtils {
 
-        private static String stripAbsolutePathPrefix(String path) {
-            return path.substring(path.indexOf("/scec"));
+        static String stripAbsolutePathPrefix(String path) {
+            if (path.contains("/scec"))
+                return path.substring(path.indexOf("/scec"));
+            else return path;
         }
+
         private static String stripQuotes(String path) {
             return path.replaceAll("['\"]", "");
         }
